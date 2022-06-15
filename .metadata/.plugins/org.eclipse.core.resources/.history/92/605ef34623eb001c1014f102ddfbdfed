@@ -1,0 +1,63 @@
+package com.form.entities;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
+@Table(name = "user")
+public class User {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	private int id;
+	@NotEmpty
+	private String firstName;
+	@NotEmpty
+	private String lastName;
+	@NotEmpty
+	@Size(min = 4, max = 10)
+	private String password;
+	@NotEmpty
+	@Email
+	private String email;
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	private Date birthDate;
+	@NotEmpty
+	private String addressLine1;
+	@NotEmpty
+	private String addressLine2;
+	@NotEmpty
+	private String city;
+	@NotEmpty
+	private String state;
+	@NotEmpty
+	private String country;
+	@NotEmpty
+	private String postalCode;
+	@NotEmpty
+	@Pattern(regexp = "^[0-9]{10}$")
+	private String phone;
+	@NotEmpty
+	private String gender;
+	private String profileImage;
+	@NotEmpty
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(insertable = false)
+	private Date createdTimestamp;
+}

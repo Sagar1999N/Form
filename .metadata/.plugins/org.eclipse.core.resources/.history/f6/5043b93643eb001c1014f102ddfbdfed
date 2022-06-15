@@ -1,0 +1,13 @@
+package com.form.controllers;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
+
+@CrossOrigin(origins = "*")
+@RestController
+public class UserController {
+	@PostMapping("/user/signin")
+	public ResponseEntity<?> signIn(@Valid @RequestBody Credentials cred){
+		
+	}
+}

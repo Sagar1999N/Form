@@ -1,0 +1,28 @@
+package com.form.services;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.form.daos.UserDao;
+import com.form.dtos.DTOEntityConverter;
+import com.form.dtos.UserDTO;
+import com.form.entities.User;
+
+@Transactional
+@Service
+public class UserServiceImpl {
+	@Autowired
+	private UserDao userDao;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private DTOEntityConverter converter;
+
+	public UserDTO findUserById(int userId) {
+		User user = userDao.findById(userId);
+		return converter.toUserDTO(user);
+	}
+}

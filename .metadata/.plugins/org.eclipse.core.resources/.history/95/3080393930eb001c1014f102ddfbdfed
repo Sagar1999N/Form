@@ -1,0 +1,9 @@
+package com.form.daos;
+
+import com.form.entities.User;
+
+public interface UserDao extends JpaRepository<User,Integer>{
+	User findById(int id);
+	User findByEmail(String email);
+	int updateFF(int id, boolean ff)
+}

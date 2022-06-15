@@ -1,0 +1,5 @@
+package com.form.config;
+
+public class SecurityConfig {
+
+}

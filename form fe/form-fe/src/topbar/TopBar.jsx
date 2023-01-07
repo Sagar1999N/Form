@@ -6,7 +6,7 @@ export default function TopBar() {
     <div className="topBar" style={cardStyle.topBar}>
       <div className="topLeft" style={cardStyle.topLeft}></div>
       <div className="topCenter" style={cardStyle.topCenter}>
-        Form
+        Form Data
       </div>
       <div className="topRight" style={cardStyle.topRight}>
         {loginStatus && "Welcome"} {firstName}
@@ -19,7 +19,7 @@ const cardStyle = {
   topBar: {
     width: "100%",
     height: "55px",
-    backgroundColor: "white",
+    //backgroundColor: "baige",
     position: "sticky",
     top: 0,
     display: "flex",

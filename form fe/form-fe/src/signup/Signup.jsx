@@ -11,7 +11,7 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [role, setRole] = useState("");
   // used to navigate from one component to another
   const navigate = useNavigate();
 
@@ -34,6 +34,7 @@ export default function Signup() {
         lastName,
         email,
         password,
+        role,
       };
 
       // url to call the api
@@ -49,7 +50,7 @@ export default function Signup() {
           toast.success("Successfully signed up new user");
 
           // navigate to the signin page
-          navigate("/signin");
+          navigate("/user/signin");
         } else {
           toast.error(result["error"]);
         }
@@ -58,12 +59,11 @@ export default function Signup() {
   };
 
   return (
-    <div>
+    <div style={cardStyle.container}>
       <h1 className="title">Signup</h1>
-
-      <div className="row">
-        <div className="col"></div>
-        <div className="col">
+      <div style={cardStyle.landing}>
+        <div style={cardStyle.lsidetext}></div>
+        <div style={cardStyle.txt}>
           <div className="form">
             <div className="mb-3">
               <label htmlFor="" className="label-control">
@@ -131,17 +131,78 @@ export default function Signup() {
             </div>
 
             <div className="mb-3">
-              <div>
-                Already have an account? <Link to="/signin">Signin here.</Link>
-              </div>
               <button onClick={signupUser} className="btn btn-primary">
                 Signup
               </button>
+              <div>
+                Already have an account?{" "}
+                <Link to="/user/signin">Signin here.</Link>
+              </div>
             </div>
           </div>
         </div>
-        <div className="col"></div>
+        <div style={cardStyle.rsidetext}></div>
       </div>
     </div>
   );
 }
+
+const cardStyle = {
+  container: {
+    //backgroundColor: "orange",
+    fontSize: "40",
+    width: "100%",
+    height: "100%",
+    textAlign: "center",
+    //display: "flex",
+    alignItems: "center",
+    fontFamily: "Josefin Sans",
+    justifyContent: "center",
+    //width: "100%",
+    //height: "100%",
+    margin: "0px",
+    padding: "0px",
+  },
+  button: {
+    fontSize: "40",
+    position: "absolute",
+    top: "50%",
+    right: "50%",
+    display: "flex",
+    alignItems: "center",
+    fontFamily: "Josefin Sans",
+    justifyContent: "center",
+    //backgroundColor: "green",
+  },
+  landing: {
+    fontSize: "40",
+    //backgroundImage:
+    //"url(https://images.pexels.com/photos/1036841/pexels-photo-1036841.jpeg)",
+    // backgroundSize: "cover",
+    // backgroundRepeat: "no-repeat",
+    // backgroundPosition: "center",
+    width: "100%",
+    height: "100vh",
+    //display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  lsidetext: {
+    //flex: "2",
+    //backgroundColor: "green",
+  },
+  txt: {
+    padding: "20px",
+    fontSize: "40",
+    //flex: "4",
+    display: "flex",
+    fontFamily: "Josefin Sans",
+    justifyContent: "center",
+    alignItems: "center",
+    //backgroundColor: "blue",
+  },
+  rsidetext: {
+    //flex: "2",
+    //backgroundColor: "yellow",
+  },
+};

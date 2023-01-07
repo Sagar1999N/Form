@@ -38,6 +38,8 @@ public class UserServiceImpl {
 		if(dbUser!=null && passwordEncoder.matches(rawPassword,dbUser.getPassword())) {
 			UserDTO result = converter.toUserDTO(dbUser);
 			result.setPassword("********");
+			System.out.println(dbUser);
+			System.out.println(result);
 			return result;
 		}
 		return null;
@@ -56,9 +58,12 @@ public class UserServiceImpl {
 		}
 		return null;
 	}
-	public UserDTO fillForm(int id,User user) {
-		User dbUser = userDao.findById(id);
+	public UserDTO fillForm(User user) {
+		User dbUser = userDao.findById(user.getId());
 		if(dbUser!=null) {
+			user.setEmail(dbUser.getEmail());
+			user.setFirstName(dbUser.getFirstName());
+			user.setLastName(dbUser.getLastName());
 		user.setId(dbUser.getId());
 		user.setPassword(dbUser.getPassword());
 		user.setFf(true);

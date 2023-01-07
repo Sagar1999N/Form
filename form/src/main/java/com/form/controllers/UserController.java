@@ -36,6 +36,7 @@ public class UserController {
 		UserDTO userDto = userService.findUserByEmailAndPassword(cred);
 		if(userDto==null)
 			return Response.error("User Not Found");
+		System.out.println(userDto);
 		return Response.success(userDto);
 	}
 	@PostMapping("/user/signup")
@@ -45,9 +46,10 @@ public class UserController {
 			return Response.success(result);
 		return Response.error("Email already in use!");
 	}
-	@PostMapping("/user/form/{id}")
-	public ResponseEntity<?> fForm(@PathVariable("id") int id, @RequestBody User user){
-		UserDTO result = userService.fillForm(id, user);
+	@PostMapping("/user/form")
+	public ResponseEntity<?> fForm(@RequestBody User user){
+		System.out.println(user);
+		UserDTO result = userService.fillForm(user);
 		if(result!=null)
 			return Response.success(result);
 		return Response.error("Errorr");
@@ -64,13 +66,23 @@ public class UserController {
 		User dbUser = userDao.findById(user.getId());
 		System.out.println(dbUser);
 		if(dbUser.getRole().equals("admin")) {
-			String filename = "Users.xlsx";
-			InputStreamResource file = new InputStreamResource(excelService.load());
-			return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename="+filename)
-		        .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
-		        .body(file);
+			 return Response.success(download());
+//			String filename = "Users.xlsx";
+//			InputStreamResource file = new InputStreamResource(excelService.load());
+//			return ResponseEntity.ok()
+//				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename="+filename)
+//		        .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+//		        .body(file);
 		}
 		return Response.error("You don't have access to data");
+	}
+	@GetMapping("/download")
+	public ResponseEntity<?> download(){
+		String filename = "Users.xlsx";
+		InputStreamResource file = new InputStreamResource(excelService.load());
+		return ResponseEntity.ok()
+			.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename="+filename)
+	        .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+	        .body(file);
 	}
 }

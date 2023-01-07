@@ -58,7 +58,25 @@ public class User {
 		this.password = password;
 		this.email = email;
 	}
-	private String role = "user";
+	
+	public User(int id, Date birthDate, String addressLine1, String addressLine2, String city, String state,
+			String country, String postalCode, @Pattern(regexp = "^[0-9]{10}$") String phone, String gender,
+			String profileImage) {
+		super();
+		this.id = id;
+		this.birthDate = birthDate;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.postalCode = postalCode;
+		this.phone = phone;
+		this.gender = gender;
+		this.profileImage = profileImage;
+	}
+
+	private String role;
 	private boolean ff = false;
 	public User(int id, @NotEmpty String firstName, @NotEmpty String lastName,
 			@NotEmpty @Size(min = 4, max = 10) String password, @NotEmpty @Email String email, @NotNull Date birthDate,
@@ -90,7 +108,10 @@ public class User {
 		return role;
 	}
 	public void setRole(String role) {
+		if(role == "admin")
 		this.role = role;
+		else if(role == null)
+			this.role="user";
 	}
 	public boolean isFf() {
 		return ff;

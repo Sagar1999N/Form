@@ -14,6 +14,10 @@ public class DTOEntityConverter {
 		dto.setEmail(entity.getEmail());
 		dto.setPassword(entity.getPassword());
 		dto.setRole(entity.getRole());
+		dto.setFf(entity.isFf());
+		System.out.println(entity.getRole());
+		System.out.println(dto.getRole());
+		System.out.println(dto.getEmail());
 		return dto;
 	}
 	public User toUserEntity(UserDTO dto) {

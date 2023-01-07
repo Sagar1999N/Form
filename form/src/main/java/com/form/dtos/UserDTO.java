@@ -7,21 +7,36 @@ public class UserDTO {
 	private String email;
 	private String password;
 	private String role;
+	private boolean ff;
 	public UserDTO(int id, String firstName, String lastName, String email, String password, String role) {
 		super();
+		
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.role = role;
+		System.out.println("yes role");
 	}
+	
+	public boolean isFf() {
+		return ff;
+	}
+
+	public void setFf(boolean ff) {
+		this.ff = ff;
+	}
+
 	public String getRole() {
 		return role;
 	}
 	public void setRole(String role) {
-		this.role = role;
-	}
+		if(role != null) {
+		this.role = role;}
+		else {this.role="user";
+			}
+		}
 	public UserDTO(int id, String firstName, String lastName, String email, String password) {
 		super();
 		this.id = id;
@@ -29,6 +44,7 @@ public class UserDTO {
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		System.out.println("no role");
 	}
 	public UserDTO() {
 		super();
@@ -67,7 +83,7 @@ public class UserDTO {
 	@Override
 	public String toString() {
 		return "UserDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", role=" + role + "]";
+				+ ", password=" + password + ", role=" + role + ", ff=" + ff + "]";
 	}
 	
 }
